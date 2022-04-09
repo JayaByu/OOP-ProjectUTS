@@ -1,7 +1,7 @@
 
-public class Main {
+public class dataUser {
 
-	public Main() {
+	public dataUser() {
 		// TODO Auto-generated constructor stub
 	}
 
