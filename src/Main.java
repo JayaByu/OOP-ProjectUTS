@@ -73,7 +73,7 @@ public class Main {
 		} while (!verify.equals("Y") && !verify.equals("n") && !verify.equals("y") && !verify.equals("N"));
         
         clear();
-        if(verify.equals("Y")) {
+        if(verify.equalsIgnoreCase("y")) {
         	System.out.println("\n\n\nAkun berhasil dibuat");
 			System.out.println("====================");
 			System.out.println();
@@ -129,7 +129,7 @@ public class Main {
     		            verify = sc.nextLine();
     				} while (!verify.equals("Y") && !verify.equals("n") && !verify.equals("y") && !verify.equals("N"));
     		        clear();
-    				if(verify.equals("Y")) {
+    				if(verify.equalsIgnoreCase("y")) {
     		        	System.out.println("\n\n\nSaldo berhasil ditambahkan");
     					System.out.println("====================");
     					System.out.println();
@@ -245,7 +245,7 @@ public class Main {
             		            verify = sc.nextLine();
             				} while (!verify.equals("Y") && !verify.equals("n") && !verify.equals("y") && !verify.equals("N"));
             		        clear();
-            				if(verify.equals("Y")) {
+            				if(verify.equalsIgnoreCase("y")) {
             					if(transferan>duit.get(j).getSaldo()) {
                         			System.out.println("Mohon maaf saldo anda tidak mencukupi, proses transfer dibatalkan\n\n");
             					}
@@ -297,8 +297,8 @@ public class Main {
     		System.out.println("======================================================");
     	}
     	else {
+			System.out.println("Database User Rekening");
     		for (int i = 0; i < duit.size(); i++){
-    			System.out.println("Database User Rekening");
     			System.out.println("=========================================================================");
     			System.out.println(duit.get(i).getNoVA()+"    | "+duit.get(i).getDataUser().getNama()+"    | "+duit.get(i).getSaldo());
     		}
