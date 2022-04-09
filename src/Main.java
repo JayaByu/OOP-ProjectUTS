@@ -152,7 +152,96 @@ public void IsiSaldo() {
     	}
     }
 
-	
+//FITUR 4
+    public void Transfer() {
+    	if(duit.isEmpty()) {
+    		System.out.println("Mohon maaf masih belum terdapat akun yang terdaftar\n\n");
+    	}
+    	else {
+    		boolean run = true;
+    		boolean run2 = true;
+    		int i =0,j=0;
+    		String ujiVA="";
+    		String uji="";
+    		int transferan;
+    		String verify;
+    		System.out.print("Masukan Nomor Virtual Account Anda: ");
+    		ujiVA= sc.nextLine();
+    		do {
+    			
+    			if(duit.get(j).getNoVA().equals(ujiVA)) {
+    				System.out.print("Masukan Nomor Virtual Account Tujuan Anda: ");
+    	    		uji= sc.nextLine();
+    	    		
+    				do { //untuk mencari VA Tujuan
+    					
+            			if(uji.equals(duit.get(i).getNoVA())){//VA Tujuan ditemukan
+            				do {
+            					System.out.print("Berapa banyak saldo We-Money yang ingin diisi [Minimal : 10000]: ");
+            					try {
+            						transferan= sc.nextInt();
+            					} catch (Exception e) {
+            						// TODO Auto-generated catch block
+            						transferan=0;
+            					}
+            					sc.nextLine();
+            				} while (transferan<10000);
+            				
+            				//verifikasi benar atau tidak nama sama no.virtual account yang diinginkan.
+            				clear();
+            				System.out.println("Preview akun tujuan");
+            				System.out.println("==========================");
+            				System.out.println("Nama               : "+duit.get(i).getDataUser().getNama());
+            				System.out.println("No Virtual Account : "+duit.get(i).getNoVA());
+            				System.out.println("Saldo tambahan     : "+transferan);
+            				do {
+            		        	System.out.print("Apakah akun yang ingin ditransfer sudah benar? [Y/N] : ");
+            		            verify = sc.nextLine();
+            				} while (!verify.equals("Y") && !verify.equals("n") && !verify.equals("y") && !verify.equals("N"));
+            		        clear();
+            				if(verify.equals("Y")) {
+            					if(transferan>duit.get(j).getSaldo()) {
+                        			System.out.println("Mohon maaf saldo anda tidak mencukupi, proses transfer dibatalkan\n\n");
+            					}
+            					else {
+            						System.out.println("\n\n\nTransfer Berhasil Dilakukan");
+                					System.out.println("====================");
+                					System.out.println();
+                					System.out.println("Nama               : "+duit.get(i).getDataUser().getNama());
+                					System.out.println("No Virtual Account : "+duit.get(i).getNoVA());
+                					System.out.println("Nominal Transfer   : "+transferan);
+                					duit.get(j).setSaldo(duit.get(j).getSaldo()-transferan); //VA Pengirim 
+                					duit.get(i).setSaldo(duit.get(i).getSaldo()+transferan); // VA Penerima
+                					System.out.println();
+            					}
+            		        }
+            		        else {
+            		        	System.out.println("\n\nTransfer antar akun dibatalkan\n\n");
+            		        	System.out.println();
+            		        }
+            				
+            				
+            				run= false;
+            			}
+            			i++;
+            		} while (i< duit.size());
+            		if(run== true) {
+            			clear();
+            			System.out.println("Mohon maaf nomor Virtual Account tujuan tidak ditemukan\n\n");
+            		}
+            		
+            		run2= false;
+    			}
+        		j++;
+			} while (j<duit.size());
+    		
+    		if(run2== true) {
+    			clear();
+    			System.out.println("Mohon maaf nomor Virtual Account anda tidak ditemukan\n\n");
+    		}
+    		
+    	}
+    }
 	
 
 //MENU VALIDASI
@@ -194,7 +283,10 @@ public void IsiSaldo() {
                     	clear();
                     break;
                 case 3:
-                	
+                	clear();
+                    	CekSaldo();
+                    	validasi();
+                    	clear();
                     break;
                 case 4:
                 	
