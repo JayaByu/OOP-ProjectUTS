@@ -5,4 +5,4 @@
 - Yohanes Ricky Kurniawan – 2440056480
 - Ernes Gideon Geonanda Senong – 2440080012
 
-### Studi Case e-Money
+### Studi Case WiMoney
