@@ -85,12 +85,82 @@ public class Main {
         	System.out.println();
         }
     }	
+	
+	
+//Menu 2
+public void IsiSaldo() {
+    	if(duit.isEmpty()) {
+    		System.out.println("Mohon maaf masih belum terdapat akun yang terdaftar\n\n");
+    	}
+    	else {
+    		boolean run = true;
+    		int i =0;
+    		String uji="";
+    		int saldoTambahan;
+    		String verify;
+    		System.out.print("Masukan Nomor Virtual Account Anda: ");
+    		uji= sc.nextLine();
+    		
+    		do {
+    			if(uji.equals(duit.get(i).getNoVA())){
+    				do {
+    					System.out.print("Berapa banyak saldo We-Money yang ingin diisi [Minimal : 10000]: ");
+    					try {
+    						saldoTambahan= sc.nextInt();
+    					} catch (Exception e) {
+    						// TODO Auto-generated catch block
+    						saldoTambahan=0;
+    					}
+    					sc.nextLine();
+    				} while (saldoTambahan<10000);
+    				
+    				clear();
+    				System.out.println("Preview isi saldo We-Money");
+    				System.out.println("==========================");
+    				System.out.println("Nama               : "+duit.get(i).getDataUser().getNama());
+    				System.out.println("No Virtual Account : "+duit.get(i).getNoVA());
+    				System.out.println("Saldo tambahan     : "+saldoTambahan);
+    				do {
+    		        	System.out.print("Apakah akun yang ingin diisi saldo sudah benar? [Y/n] (case sensitive): ");
+    		            verify = sc.nextLine();
+    				} while (!verify.equals("Y") && !verify.equals("n") && !verify.equals("y") && !verify.equals("N"));
+    		        clear();
+    				if(verify.equals("Y")) {
+    		        	System.out.println("\n\n\nSaldo berhasil ditambahkan");
+    					System.out.println("====================");
+    					System.out.println();
+    					System.out.println("Nama               : "+duit.get(i).getDataUser().getNama());
+    					System.out.println("No Virtual Account : "+duit.get(i).getNoVA());
+    					System.out.println("Saldo Awal         : "+duit.get(i).getSaldo());
+    					System.out.println("Tambahan Saldo     : "+saldoTambahan);
+    					duit.get(i).setSaldo(saldoTambahan+duit.get(i).getSaldo());
+    					System.out.println("\nTotal Saldo        : "+duit.get(i).getSaldo());
+    					System.out.println();
+    		        }
+    		        else {
+    		        	System.out.println("\n\nPengisian saldo dibatalkan\n\n");
+    		        	System.out.println();
+    		        }    				
+    				run= false;
+    			}
+    			i++;
+    		} while (i< duit.size());
+    		if(run== true) {
+    			clear();
+    			System.out.println("Mohon maaf nomor Virtual Account anda tidak ditemukan\n\n");
+    		}
+    	}
+    }
+
+	
+	
 
 //MENU VALIDASI
     public void validasi(){
     	System.out.print("Ketik apapun untuk lanjut: ");
     	sc.nextLine();
     }
+	
 	
     public Main() { 
         int input = -1;
@@ -119,7 +189,9 @@ public class Main {
                     	break;
                 case 2:
                 	clear();
-                	IsiSaldo();
+                    	IsiSaldo();
+                    	validasi();
+                    	clear();
                     break;
                 case 3:
                 	
