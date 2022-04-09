@@ -1,11 +1,11 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
-
 class menu {
     menu() {
         System.out.println("Welcome to We-Money");
         System.out.println("===================");
+        // terdapat fitur angka 0 untuk sebagai admin
         System.out.println("1. Pembuatan akun");
         System.out.println("2. Isi Saldo");
         System.out.println("3. Cek Saldo");
@@ -21,17 +21,20 @@ class input {
 }
 
 public class Main {
-    Scanner sc = new Scanner(System.in); 
+    Scanner sc = new Scanner(System.in);
     Random random = new Random();
     Vector <eMoney> duit = new Vector<>();
-	
+    
+    
+    //CLEAR
     public void clear() {
     	for (int i = 0; i < 25; i++) {
 			System.out.println();
 		}
     }
     
-//Bagian 1
+    
+    //FITUR 1
     public void PembuatanAkun() {
         String nama = "";
         String nomor = "";
@@ -84,11 +87,11 @@ public class Main {
         	System.out.println("\n\nPembuatan akun dibatalkan");
         	System.out.println();
         }
-    }	
-	
-	
-//Menu 2
-public void IsiSaldo() {
+    }
+    
+    
+    //FITUR 2
+    public void IsiSaldo() {
     	if(duit.isEmpty()) {
     		System.out.println("Mohon maaf masih belum terdapat akun yang terdaftar\n\n");
     	}
@@ -101,7 +104,7 @@ public void IsiSaldo() {
     		System.out.print("Masukan Nomor Virtual Account Anda: ");
     		uji= sc.nextLine();
     		
-    		do {
+    		do { //untuk mencari VA
     			if(uji.equals(duit.get(i).getNoVA())){
     				do {
     					System.out.print("Berapa banyak saldo We-Money yang ingin diisi [Minimal : 10000]: ");
@@ -114,6 +117,7 @@ public void IsiSaldo() {
     					sc.nextLine();
     				} while (saldoTambahan<10000);
     				
+    				//verifikasi benar atau tidak nama sama no.virtual account yang diinginkan.
     				clear();
     				System.out.println("Preview isi saldo We-Money");
     				System.out.println("==========================");
@@ -140,7 +144,9 @@ public void IsiSaldo() {
     		        else {
     		        	System.out.println("\n\nPengisian saldo dibatalkan\n\n");
     		        	System.out.println();
-    		        }    				
+    		        }
+    				
+    				
     				run= false;
     			}
     			i++;
@@ -150,9 +156,49 @@ public void IsiSaldo() {
     			System.out.println("Mohon maaf nomor Virtual Account anda tidak ditemukan\n\n");
     		}
     	}
+    	
     }
-
-//FITUR 4
+    
+    
+    
+    //FITUR 3
+    public void CekSaldo() {
+    	if (duit.isEmpty()) {
+    		System.out.println("Mohon maaf masih belum terdapat akun yang terdaftar\n\n");
+		}
+    	else {
+    		boolean run = true;
+    		int i =0;
+    		String uji="";
+    		System.out.print("Masukan Nomor Virtual Account Anda: ");
+    		uji= sc.nextLine();
+    		
+    		do { //untuk mencari VA
+    			if(uji.equals(duit.get(i).getNoVA())){
+    		        clear();
+    		        	System.out.println("\n\n\nTampilan Saldo Anda");
+    					System.out.println("====================");
+    					System.out.println();
+    					System.out.println("Nama               : "+duit.get(i).getDataUser().getNama());
+    					System.out.println("No Virtual Account : "+duit.get(i).getNoVA());
+    					System.out.println("Total Saldo        : "+duit.get(i).getSaldo());
+    					System.out.println();
+    				run= false;
+    			}
+    			i++;
+    		} while (i< duit.size());
+    		if(run== true) {
+    			clear();
+    			System.out.println("Mohon maaf nomor Virtual Account anda tidak ditemukan\n\n");
+    		}
+		}
+    	
+        
+    }
+    
+    
+    
+    //FITUR 4
     public void Transfer() {
     	if(duit.isEmpty()) {
     		System.out.println("Mohon maaf masih belum terdapat akun yang terdaftar\n\n");
@@ -242,15 +288,33 @@ public void IsiSaldo() {
     		
     	}
     }
-	
-
-//MENU VALIDASI
+    
+    
+    //MENU ADMIN
+    public void Admin() {
+    	if(duit.isEmpty()) {
+    		System.out.println("Mohon maaf tidak adak akun yang tersimpan pada sistem");
+    		System.out.println("======================================================");
+    	}
+    	else {
+    		for (int i = 0; i < duit.size(); i++){
+    			System.out.println("Database User Rekening");
+    			System.out.println("=========================================================================");
+    			System.out.println(duit.get(i).getNoVA()+"    | "+duit.get(i).getDataUser().getNama()+"    | "+duit.get(i).getSaldo());
+    		}
+    		//remove
+    	}
+    }
+    
+    
+    //MENU VALIDASI
     public void validasi(){
     	System.out.print("Ketik apapun untuk lanjut: ");
     	sc.nextLine();
     }
-	
-	
+    
+    
+    //MAIN PROGRAM
     public Main() { 
         int input = -1;
         boolean isRun = true;
@@ -268,28 +332,35 @@ public void IsiSaldo() {
 
             switch (input) {
                 case 0:
-                	
+                	clear();
+                    Admin();
+                    System.out.println("\n\n\n");
+                    validasi();
+                    clear();
                     break;
                 case 1:
                 	clear();
-                    	PembuatanAkun();
-                    	validasi();
-                    	clear();
-                    	break;
+                    PembuatanAkun();
+                    validasi();
+                    clear();
+                    break;
                 case 2:
                 	clear();
-                    	IsiSaldo();
-                    	validasi();
-                    	clear();
+                    IsiSaldo();
+                    validasi();
+                    clear();
                     break;
                 case 3:
                 	clear();
-                    	CekSaldo();
-                    	validasi();
-                    	clear();
+                    CekSaldo();
+                    validasi();
+                    clear();
                     break;
                 case 4:
-                	
+                	clear();
+                    Transfer();
+                    validasi();
+                    clear();
                     break;
                 case 5:
                     isRun = !isRun;
