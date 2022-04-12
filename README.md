@@ -6,3 +6,10 @@
 - Ernes Gideon Geonanda Senong – 2440080012
 
 ### Studi Case We-Money
+
+
+
+<div align="center" >
+ <h1>Class Diagram<h1><br>
+<img src="https://raw.githubusercontent.com/JayaByu/OOP-ProjectUTS/main/ClassDiagram.png">
+</div>
